@@ -69,8 +69,8 @@ export default function LoginModal() {
           />
         </DialogContent>
         <DialogActions >
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit">Ingresar</Button>
+          <Button onClick={handleClose} variant='contained' color='error'>Cancelar</Button>
+          <Button type="submit" variant='contained' color='success'>Ingresar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

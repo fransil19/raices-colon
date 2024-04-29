@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import LoginModal from './LoginModal';
 import BasicMenu from './Menu';
+import FileUploadModal from './FileUploadModal';
 
 const Header = () => {
+  
   return (
     <header className="flex items-center justify-between bg-white shadow-md p-4">
       <div className="flex items-center">
@@ -23,6 +25,7 @@ const Header = () => {
         {/* <Link href="/login">
         <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Iniciar sesión</button>
         </Link> */}
+        <FileUploadModal />
         <LoginModal />
         <BasicMenu />
       </nav>
