@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import SearchBar from './SearchBar';
-import * as XLSX from 'xlsx';
-import { read } from 'xlsx';
 
 interface Product{
   id: number,
