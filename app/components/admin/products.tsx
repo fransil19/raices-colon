@@ -33,6 +33,7 @@ export const ProductList = (props: any) => (
     <TextField source="id" />
       <TextField source="title" />
       <TextField source="price" />
+      <TextField source="category" />
       <TextField source="image" />
       <ShowButton label="" />
       <EditButton label="" />

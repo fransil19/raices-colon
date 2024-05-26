@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import SearchBar from './SearchBar';
+import { getProducts } from '../services/firestoreServices';
 
 interface Product{
   id: number,
@@ -9,7 +10,6 @@ interface Product{
   price: string,
   title: string
 }
-
 
 const ProductContainer = () => {
   const products = [
@@ -206,15 +206,35 @@ const ProductContainer = () => {
       "title": "Pera"
     }
     ];
+  
+  const [productFirestore, setProductFirestore] = useState<any>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
 
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  useEffect(() => {
+    const getProdAsync = async () => {
+      const productsFire = await getProducts();
+      setProductFirestore(productsFire)
 
+      const productsSorted = productsFire.sort((a,b) => {
+        let nameA = a.title?.toLowerCase(), nameB = b.title?.toLowerCase();
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0; //default return value (no sorting)
+      })
+      setFilteredProducts(productsSorted)
+    }
+    getProdAsync()
+  },[])
+  
+  
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white mt-8 mb-8 rounded-md">
-      <SearchBar products={products} setProducts={setFilteredProducts}/>
+      <SearchBar products={productFirestore} setProducts={setFilteredProducts}/>
       <h2 className=' text-xl border-b-2'>Productos</h2>
       <div className="grid grid-cols-1 gap-20 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6 w-full">
-        {filteredProducts.map((product) => (
+        {filteredProducts.map((product:any) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

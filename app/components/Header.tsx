@@ -22,12 +22,12 @@ const Header = () => {
         <Link href="/contact" className="text-gray-600 hover:text-gray-800">
           Contacto
         </Link> */}
-        {/* <Link href="/login">
+        <Link href="/admin">
         <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Iniciar sesión</button>
-        </Link> */}
-        <FileUploadModal />
+        </Link>
+{/*         <FileUploadModal />
         <LoginModal />
-        <BasicMenu />
+        <BasicMenu /> */}
       </nav>
       
     </header>

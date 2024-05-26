@@ -1,8 +1,11 @@
 import { Login, LoginForm } from "react-admin";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from "firebase/compat/app";
+import { firebaseApp } from "@/firebaseConfig";
+import * as auth from 'firebase/auth'
 import ForgotPasswordButton from './CustomForgotPassword'
 
+const authorization = auth.getAuth(firebaseApp)
 // Configure FirebaseUI.
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
@@ -11,8 +14,8 @@ const uiConfig = {
   signInSuccessUrl: '#/',
   // We will display Google and Facebook as auth providers.
   signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    auth.GoogleAuthProvider.PROVIDER_ID,
+    auth.FacebookAuthProvider.PROVIDER_ID
   ],
   // Optional callbacks in order to get Access Token from Google,Facebook,... etc
   /* callbacks: {
@@ -29,7 +32,7 @@ const uiConfig = {
 };
 
 const SignInScreen = () => <StyledFirebaseAuth 
-  firebaseAuth={firebase.auth()}
+  firebaseAuth={authorization}
   uiConfig={uiConfig}
 />;
 
