@@ -1,20 +1,34 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import useProductsStore from '../store';
 
 const Category = ({src, alt, text} : {src: string, alt: string, text: string}) => {
   const [isHovering, setIsHovered] = useState(false);
+  const [filter, setFilter] = useState('');
+  const { products, categoryFilter, filterProducts, setFilteredProducts, setCategoryFilter } = useProductsStore();
 
+  const handleClick = () => {    
+    if(categoryFilter && categoryFilter === alt.toLowerCase()){
+      setFilteredProducts(products);
+      setCategoryFilter('')
+    }
+    else{
+      setCategoryFilter(alt.toLowerCase())
+      filterProducts(alt.toLowerCase());
+    }
+  }
   return (
     <div
       className="relative w-20 h-20 sm:w-32 sm:h-32 rounded-full cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       <Image
         src={src}
         alt={alt}
-        layout="fill"
+        fill
         className={`transition-colors rounded-full border duration-500 ease-in-out ${
           isHovering ? 'opacity-0' : ''
         }`}

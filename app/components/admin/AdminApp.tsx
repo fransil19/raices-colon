@@ -6,7 +6,9 @@ import {
   RAFirebaseOptions
 } from "react-admin-firebase";
 import LoginPage from './LoginPage';
-import { ProductList, ProductShow, ProductCreate, ProductEdit } from "./products";
+import { ProductList, ProductShow } from "./products";
+import ProductEdit from "./ProductEdit";
+import ProductCreate from "./ProductCreate";
 
 import 'firebase/compat/storage';
 

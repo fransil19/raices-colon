@@ -3,16 +3,11 @@ import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import SearchBar from './SearchBar';
 import { getProducts } from '../services/firestoreServices';
-
-interface Product{
-  id: number,
-  image: string,
-  price: string,
-  title: string
-}
+import useProductsStore from '../store';
 
 const ProductContainer = () => {
-  const products = [
+  const { products, filteredProducts, setProducts, setFilteredProducts } = useProductsStore();
+  /* const products = [
     {
       "id": 1,
       "image": "/card-fruta.jpg",
@@ -205,15 +200,15 @@ const ProductContainer = () => {
       "price": "$90",
       "title": "Pera"
     }
-    ];
+    ]; */
   
-  const [productFirestore, setProductFirestore] = useState<any>([]);
-  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+ /*  const [productFirestore, setProductFirestore] = useState<any>([]); */
+  /* const [filteredProducts, setFilteredProducts] = useState<any[]>([]); */
 
   useEffect(() => {
     const getProdAsync = async () => {
       const productsFire = await getProducts();
-      setProductFirestore(productsFire)
+      setProducts(productsFire)
 
       const productsSorted = productsFire.sort((a,b) => {
         let nameA = a.title?.toLowerCase(), nameB = b.title?.toLowerCase();
@@ -230,8 +225,8 @@ const ProductContainer = () => {
   
   
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white mt-8 mb-8 rounded-md">
-      <SearchBar products={productFirestore} setProducts={setFilteredProducts}/>
+    <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white mt-8 mb-8 rounded-md prod-container" >
+      <SearchBar products={products} setProducts={setFilteredProducts}/>
       <h2 className=' text-xl border-b-2'>Productos</h2>
       <div className="grid grid-cols-1 gap-20 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6 w-full">
         {filteredProducts.map((product:any) => (
